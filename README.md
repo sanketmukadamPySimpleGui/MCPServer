@@ -1,3 +1,5 @@
+-----
+
 # Multi-Purpose Chatbot (MCP) Quickstart
 
 This project is a Proof-of-Concept (PoC) demonstrating a powerful, **agentic AI chatbot**. The application features a web-based chat interface that connects to large language models (LLMs) and leverages a local **Model Context Protocol (MCP)** server to execute a wide range of real-world tasks. This architecture allows the AI to go beyond simple text generation and interact with its local environment, databases, and external APIs.
@@ -95,30 +97,32 @@ You'll be directed to a login page. Enter a username to start a new chat session
 
 -----
 
-## 💡 Using the Chatbot
+## 🛠️ Maintenance & Troubleshooting
 
-### Main Chat Window
+### `reset_mcp.sh` Utility
 
-  * Type your questions into the input box at the bottom.
-  * The chat window will display your messages and the bot's responses.
-  * **Tool calls and their results are displayed in distinct, color-coded boxes for easy debugging and transparency.**
+The `reset_mcp.sh` script is a crucial utility for completely resetting the application stack. It's particularly useful when you're making changes to the code or need to clean up data volumes from previous runs.
 
-### Sidebar
+#### What it does:
 
-The left-hand sidebar dynamically displays everything the `mcp-server` has to offer:
+1.  **Stops and removes** all running Docker containers defined in `docker-compose.yml`.
+2.  **Removes all associated data volumes** (`mongo_data`, `ollama_data`), ensuring a clean state.
+3.  **Removes the Docker network** for the project.
+4.  **Deletes residual Ollama data** on the host machine.
+5.  **Rebuilds all Docker images** from scratch, ensuring any code changes are included.
+6.  **Restarts all services** in detached mode (`-d`).
+7.  **Monitors container health** with a 30-step loop, waiting for each service to become `healthy` before declaring the setup complete.
 
-  * **Server Information**: The version and runtime of the MCP server.
-  * **Available Tools**: A list of all tools the LLM can call, like `list_tables` and `run_sql_query`.
-  * **Available Resources**: A list of connected resources, such as your SQLite and MongoDB databases.
-  * **Available Prompts**: A list of predefined prompts you can click to run.
+#### How to use it:
 
-### Control Panel
+To use the script, simply make it executable and run it from your terminal:
 
-The top control panel lets you customize your chat experience:
+```bash
+chmod +x ./reset_mcp.sh
+./reset_mcp.sh
+```
 
-  * **Enable MCP Tools**: A toggle to turn on/off the use of MCP tools. When disabled, the bot acts as a standard LLM without tool use.
-  * **LLM Provider**: A dropdown to switch between OpenAI and a local Ollama instance.
-  * **Database**: A dropdown to select which database connection to use.
+This will perform a full, clean restart of your application, resolving most common issues that might arise from caching or corrupted data.
 
 -----
 
