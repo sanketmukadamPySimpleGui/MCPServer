@@ -1,0 +1,346 @@
+/* --- General Setup --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* New background from login.css */
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333; /* Text color from login.css */
+}
+
+/* --- Main App Layout --- */
+#app-container {
+    width: 90%;
+    max-width: 1200px;
+    height: 95vh;
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent background from login.css */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer, deeper shadow from login.css */
+    display: flex;
+    overflow: hidden;
+    backdrop-filter: blur(10px); /* Adds a cool blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- Sidebar (MCP Info) --- */
+#sidebar {
+    width: 320px;
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.sidebar-header p {
+    margin: 4px 0 0;
+    font-size: 0.85em;
+    color: #555;
+}
+
+#server-details {
+    padding: 15px;
+    font-size: 0.9em;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+#sidebar details {
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+#sidebar details[open] {
+    border-color: #eee;
+}
+
+#sidebar summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: #444;
+    padding: 12px 15px;
+    list-style: none;
+    position: relative;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+}
+
+#sidebar summary:hover {
+    background-color: #f5f5f5;
+}
+
+#sidebar summary::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    font-size: 0.7em;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+#sidebar details[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.details-content {
+    padding: 0 15px 12px 25px;
+    color: #444;
+    font-size: 0.95em;
+}
+
+.details-content ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.details-content li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.details-content code {
+    background-color: #f5f5f5;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    color: #d9534f;
+}
+
+/* --- Chat Area --- */
+#chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* New header with a gradient from login.css */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #4a90e2 0%, #8e44ad 100%); /* Using login.css colors */
+    color: white;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#header h1 {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+#header p {
+    margin: 4px 0 0;
+    font-size: 0.95em;
+    opacity: 0.9;
+}
+
+#header-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#controls-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#controls-container label {
+    color: #eee;
+}
+
+#controls-container select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.mcp-toggle-container,
+.llm-selector-container,
+.db-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    color: white;
+}
+
+#mcp-toggle {
+    cursor: pointer;
+}
+
+/* Messages Section */
+#messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 75%;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: #f1f3f5;
+    align-self: flex-start;
+    border-bottom-left-radius: 6px;
+}
+
+.user-message {
+    background-color: #4a90e2; /* Primary color from login.css */
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 6px;
+}
+
+.tool-call-message {
+    background-color: #fffde7;
+    color: #a1887f;
+    align-self: center;
+    font-style: italic;
+    font-size: 0.9em;
+    border: 1px solid #f9e9cc;
+    max-width: 90%;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #ffcdd2;
+    color: #d9534f; /* Error color from login.css */
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+#thinking {
+    display: none;
+    align-self: flex-start;
+    color: #9e9e9e;
+    font-style: italic;
+}
+
+/* Input Area */
+#input-container {
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+#message-input {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    padding: 12px 18px;
+    font-size: 1em;
+    resize: none;
+    overflow-y: hidden;
+    max-height: 120px;
+    line-height: 1.4;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#message-input:focus {
+    outline: none;
+    border-color: #4a90e2; /* Primary color from login.css */
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+#send-button {
+    background-color: #4a90e2; /* Primary color from login.css */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-left: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+    padding-bottom: 2px;
+}
+
+#send-button:hover {
+    background-color: #357abd; /* Primary hover from login.css */
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+.user-session {
+    margin-top: auto;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+/* Specific logout button styles */
+#logout-button {
+    background-color: #d9534f; /* Error color from login.css */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+#logout-button:hover {
+    background-color: #c9302c;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #4a90e2; /* Primary color from login.css */
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

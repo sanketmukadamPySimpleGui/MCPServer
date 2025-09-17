@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-dotenv
+mcp
+openai
+psutil
+httpx
+pymongo==4.6.2
+dnspython
+certifi
+httpx-sse
+websockets
+pydantic-settings
+ollama

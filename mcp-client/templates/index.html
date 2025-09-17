@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MCP Chatbot</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <meta name="theme-color" content="#0d6efd" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div id="app-container">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <h2>MCP Server</h2>
+        <p id="server-name">Loading...</p>
+      </div>
+
+      <nav id="server-details">
+        <details open>
+          <summary>Server Information</summary>
+          <div id="server-info-content" class="details-content"><p>Loading...</p></div>
+        </details>
+
+        <details>
+          <summary>Available Tools</summary>
+          <ul id="tools-list" class="details-content"><li>Loading...</li></ul>
+        </details>
+
+        <details>
+          <summary>Available Resources</summary>
+          <ul id="resources-list" class="details-content"><li>Loading...</li></ul>
+        </details>
+
+        <details>
+          <summary>Available Prompts</summary>
+          <ul id="prompts-list" class="details-content"><li>Loading...</li></ul>
+        </details>
+      </nav>
+    </aside>
+
+    <main id="chat-container">
+      <header id="header">
+        <div id="header-content">
+          <h1>Agentic AI Chatbot</h1>
+          <p>Powered by OpenAI & MCP</p>
+        </div>
+        <div id="controls-container">
+          <div class="mcp-toggle-container">
+            <input type="checkbox" id="mcp-toggle" checked />
+            <label for="mcp-toggle">Enable MCP Tools</label>
+          </div>
+
+          <div class="llm-selector-container">
+            <label for="llm-provider-select">LLM Provider:</label>
+            <select id="llm-provider-select">
+              <option value="openai" selected>OpenAI</option>
+              <option value="ollama">Ollama (Local)</option>
+            </select>
+            <select id="ollama-model-select" class="hidden">
+              <option>Loading...</option>
+            </select>
+          </div>
+
+          <div class="db-selector-container">
+            <label for="db-connection-select">Database:</label>
+            <select id="db-connection-select">
+              <option>Loading...</option>
+            </select>
+          </div>
+        </div>
+        <button id="logout-button" class="btn" style="background-color:#dc3545;color:white;border:none;padding:6px 12px;margin-left:20px;border-radius:4px;cursor:pointer;">
+          Logout
+        </button>
+      </header>
+
+      <section id="messages">
+        <div class="message bot-message">
+          👋 Hello! I'm an OpenAI-powered chatbot. I can use MCP server tools to help with tasks.
+        </div>
+        <div id="thinking" class="hidden">🤔 Thinking...</div>
+      </section>
+
+      <footer id="input-container">
+        <textarea id="message-input" placeholder="Ask about files, dates, or calculations..." rows="1" autofocus></textarea>
+        <button id="send-button" class="btn" title="Send Message">&#10148;</button>
+      </footer>
+    </main>
+  </div>
+
+    <script src="/static/script.js?v=20250903"></script>
+</body>
+</html>
