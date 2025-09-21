@@ -150,3 +150,132 @@ The agent will automatically use the correct tool (`run_sql_query` for SQLite or
   - "What is the weather like in New York?"
 
 Feel free to explore the full capabilities of the agent and discover how it seamlessly integrates LLM intelligence with real-world tasks.
+
+### Documentation for `fastmcp_quickstart.py`
+
+This is a comprehensive documentation for the `fastmcp_quickstart.py` script. You can add this directly to a GitHub repository or a project wiki.
+
+-----
+
+# FastMCP Quickstart Server
+
+This project is a demonstration of an **MCP (Model Context Protocol)** server built using the `FastMCP` framework. It exposes a variety of tools, resources, and prompts, allowing Large Language Models (LLMs) to interact with the external environment, including the file system, databases, web APIs, and the internet.
+
+### 📝 Features
+
+This server provides a rich set of capabilities, categorized by function:
+
+  * **Core Functions**:
+      * `add`: Adds two numbers.
+      * `get_current_datetime`: Retrieves the current date and time.
+      * `list_files`: Lists files and directories.
+      * `read_file`: Reads the content of a file.
+      * `write_file`: Writes content to a file.
+      * `run_shell_command`: Executes a predefined set of safe shell commands.
+      * `get_system_usage`: Returns system metrics like CPU and memory usage.
+  * **Database Management**:
+      * `list_database_connections`: Lists all available database connections.
+      * `get_database_info`: Retrieves information about a specific database.
+      * `list_tables`: Lists tables or collections in a database.
+      * `get_table_schema`: Gets the schema for a table or collection.
+      * `run_sql_query`: Executes a SQL query.
+      * `find_documents`: Finds documents in a MongoDB collection.
+      * `count_documents`: Counts documents in a MongoDB collection.
+  * **Internet & Web Tools**:
+      * `web_scrape`: Scrapes text content from a URL.
+      * `get_current_weather`: Fetches current weather data from OpenWeatherMap.
+      * `Google Search`: Performs a Google search using SerpApi.
+  * **Resources & Prompts**:
+      * `get_greeting`: A resource that returns a greeting.
+      * `system_info`: A resource that provides basic system information.
+      * `greet_user`: A prompt to generate a user greeting.
+      * `summarize_text`: A prompt to summarize a given text.
+      * `translate_text`: A prompt to translate text.
+
+### ⚙️ Prerequisites
+
+Before you can run the server, you need to set up the following:
+
+#### 1\. Environment Variables (`.env`)
+
+Create a `.env` file in the project's root directory with the following variables:
+
+```
+# Required for the `get_current_weather` tool
+OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
+
+# Required for the `Google Search` tool
+SERPAPI_API_KEY=your_serpapi_api_key
+
+# Optional: Limits the number of characters scraped by `web_scrape`
+MAX_SCRAPED_CHARS=20000
+```
+
+#### 2\. Python Dependencies
+
+Install the required Python packages using pip. Your `requirements.txt` file should contain:
+
+```
+fastmcp
+python-dotenv
+psutil
+httpx
+requests
+beautifulsoup4
+serpapi
+pymongo
+```
+
+### 🚀 Installation and Usage
+
+Follow these steps to get the server up and running:
+
+1.  **Clone the repository**:
+
+    ```bash
+    git clone <your-repo-url>
+    cd <your-repo-name>
+    ```
+
+2.  **Set up a virtual environment** (recommended):
+
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows, use: .venv\Scripts\activate
+    ```
+
+3.  **Install dependencies**:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Start the server**:
+
+    ```bash
+    python fastmcp_quickstart.py
+    ```
+
+    This command starts the server using the default `stdio` transport. The server will now be listening for requests.
+
+### 🌐 Transports
+
+The server supports multiple transport protocols. You can specify the desired transport when running the script:
+
+  * **`stdio` (Default)**: For local testing and CLI-based interactions. Communication happens over standard input and output.
+    ```bash
+    python fastmcp_quickstart.py --transport stdio
+    ```
+  * **`sse`**: For streaming communication over HTTP, used by the `mcp-client`. The server runs as a web service.
+    ```bash
+    python fastmcp_quickstart.py --transport sse
+    ```
+    The server will be available at `http://localhost:8000`. The SSE endpoint is at `/sse`.
+  * **`streamable-http`**: Similar to SSE, but uses HTTP streaming.
+    ```bash
+    python fastmcp_quickstart.py --transport streamable-http
+    ```
+
+### 🔒 Safety Measures
+
+The `run_shell_command` tool is designed with a strong emphasis on security. It **only allows** a predefined set of safe shell commands listed in the `ALLOWED_SHELL_COMMANDS` constant. Any attempt to execute a command not on this list will be rejected with an error. This prevents malicious command injection.
