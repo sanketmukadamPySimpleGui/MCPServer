@@ -40,6 +40,9 @@ The application consists of a microservice architecture with three main componen
 
 -----
 
+![Uploading image.png…]()
+
+
 ## 🚀 Getting Started
 
 ### Prerequisites
