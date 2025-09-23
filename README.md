@@ -40,7 +40,9 @@ The application consists of a microservice architecture with three main componen
 
 -----
 
-![Uploading image.png…]()
+<img width="1406" height="790" alt="Screenshot 2025-09-23 at 11 05 47 AM" src="https://github.com/user-attachments/assets/94eb274b-a6c2-474e-ae1a-0dc8d937733e" />
+
+
 
 
 ## 🚀 Getting Started
