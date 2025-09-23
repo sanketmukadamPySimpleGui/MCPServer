@@ -156,10 +156,6 @@ The agent will automatically use the correct tool (`run_sql_query` for SQLite or
 
 Feel free to explore the full capabilities of the agent and discover how it seamlessly integrates LLM intelligence with real-world tasks.
 
-### Documentation for `fastmcp_quickstart.py`
-
-This is a comprehensive documentation for the `fastmcp_quickstart.py` script. You can add this directly to a GitHub repository or a project wiki.
-
 
 ### Documentation of the MCP Project Structure 📂
 
@@ -199,6 +195,10 @@ In this architecture, the **Nginx server acts as a reverse proxy**. Its primary 
 
 
 -----
+### Documentation for `fastmcp_quickstart.py`
+
+This is a comprehensive documentation for the `fastmcp_quickstart.py` script. You can add this directly to a GitHub repository or a project wiki.
+
 
 # FastMCP Quickstart Server
 
